@@ -38,5 +38,23 @@ module avalon_aes_interface (
 	output logic [31:0] EXPORT_DATA		// Exported Conduit Signal to LEDs
 );
 
+	always_ff @ (posedge Clk) begin
+		if (Reset)
+			EXPORT_DATA <= 32'b0;
+		else if (AVL_ADDR == 4'b0000) // address to upper 4 bytes of AES_KEY
+			EXPORT_DATA[31:16] <= AVL_WRITEDATA[31:16];
+		else if (AVL_ADDR == 4'b0011) // address to lower 4 bytes of AES_KEY
+			EXPORT_DATA[7:0] <= AVL_WRITEDATA[7:0];
+	end
+
+	reg_file reg_file_0	(
+		.Clk(CLK),
+		.Reset(RESET),
+		.W(AVL_WRITE),
+		.Addr(AVL_ADDR),
+		.Byte_En(AVL_BYTE_EN),
+		.Write_Data(AVL_WRITEDATA),
+		.Read_Data(AVL_READDATA)
+	);
 
 endmodule
