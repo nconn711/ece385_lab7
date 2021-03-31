@@ -31,6 +31,8 @@
 # ignore Quartus II generated files
 *_generation_script*
 *_inst.vhd
+*.o
+*.json
 *.bak
 *.cmp
 *.done
@@ -58,6 +60,9 @@
 *example*
 *sopc_*
 # *.sdc # I want those timing files
+
+*/Makefile
+*/main
 
 # ignore Quartus II generated folders
 */greybox_tmp/
