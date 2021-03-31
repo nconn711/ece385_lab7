@@ -58,6 +58,131 @@ char charsToHex(char c1, char c2)
 	return (hex1 << 4) + hex2;
 }
 
+void charArrayToHex(unsigned char *char_array, unsigned char *hex_array) {
+	for (int row = 0; row < 4; row++) {
+		for (int col = 0; col < 4; col++) {
+			int index = (row + col * 4) * 2;
+			hex_array[col+row*4] = charsToHex(char_array[index], char_array[index + 1]);
+		}
+	}
+}
+
+void hexArrayToInt(unsigned char *hex_array, unsigned int *int_array) {
+	for (int word = 0; word < 4; word++) {
+		int_array[word] = (hex_array[word+0*4] << 8*3) | (hex_array[word+1*4] << 8*2) | (hex_array[word+2*4] << 8*1) | (hex_array[word+3*4] << 8*0);
+	}
+}
+
+void rotWord(unsigned char *key, unsigned char *round_key, int z) {
+	if (z == 0) {
+		for (int row = 0; row < 4; row++) {
+			round_key[0+row*4+0*16] = key[3+((row+1)%4)*4];
+		}
+	}
+	else {
+		for (int row = 0; row < 4; row++) {
+			round_key[0+row*4+z*16] = round_key[3+((row+1)%4)*4+(z-1)*16];
+		}
+	}
+}
+
+void subWord(unsigned char *round_key, int z) {
+	for (int row = 0; row < 4; row++) {
+		round_key[0+row*4+z*16] = aes_sbox[round_key[0+row*4+z*16]];
+	}
+}
+
+void xorRcon(unsigned char *key, unsigned char *round_key, int z) {
+	if (z == 0) {
+		for (int row = 0; row < 4; row++) {
+			round_key[0+row*4+0*16] = key[0+row*4] ^ round_key[0+row*4+0*16] ^ ((Rcon[1] & (0xff << ((3 - row)*8))) >> ((3 - row)*8));
+		}
+	}
+	else {
+		for (int row = 0; row < 4; row++) {
+			round_key[0+row*4+z*16] = round_key[0+row*4+(z-1)*16] ^ round_key[0+row*4+z*16] ^ ((Rcon[z+1] & (0xff << ((3 - row)*8))) >> ((3 - row)*8));
+		}
+	}
+}
+
+void xor(unsigned char *key, unsigned char *round_key, int z) {
+	if (z == 0) {
+		for (int col = 1; col < 4; col++) {
+			for (int row = 0; row < 4; row++) {
+				round_key[col+row*4+0*16] = key[col+row*4] ^ round_key[(col-1)+row*4+0*16];
+			}
+		}
+	}
+	else {
+		for (int col = 1; col < 4; col++) {
+			for (int row = 0; row < 4; row++) {
+				round_key[col+row*4+z*16] = round_key[col+row*4+(z-1)*16] ^ round_key[(col-1)+row*4+z*16];
+			}
+		}
+	}
+}
+
+void keyExpansion(unsigned char *key, unsigned char *round_key) {
+	for (int z = 0; z < 10; z++) {
+		rotWord(key, round_key, z);
+		subWord(round_key, z);
+		xorRcon(key, round_key, z);
+		xor(key, round_key, z);
+	}
+}
+
+void subBytes(unsigned char *state) {
+	for (int row = 0; row < 4; row++) {
+		for (int col = 0; col < 4; col++) {
+			state[col+row*4] = aes_sbox[state[col+row*4]];
+		}
+	}
+}
+
+void shiftRows(unsigned char *state) {
+	unsigned char prestate[4][4];
+	for (int row = 0; row < 4; row++) {
+		for (int col = 0; col < 4; col++) {
+			prestate[row][col] = state[col+row*4];
+		}
+	}
+	for (int row = 1; row < 4; row++) {
+		for (int col = 0; col < 4; col++) {
+			state[col+row*4] = prestate[row][(col+row)%4];
+		}
+	}
+}
+
+void mixColumns(unsigned char *state) {
+	unsigned char prestate[4][4];
+	for (int row = 0; row < 4; row++) {
+		for (int col = 0; col < 4; col++) {
+			prestate[row][col] = state[col+row*4];
+		}
+	}
+	for (int col = 0; col < 4; col++) {
+		state[col+0*4] = gf_mul[prestate[0][col]][0] ^ gf_mul[prestate[1][col]][1] ^ prestate[2][col] ^ prestate[3][col];
+	}
+	for (int col = 0; col < 4; col++) {
+		state[col+1*4] = prestate[0][col] ^ gf_mul[prestate[1][col]][0] ^ gf_mul[prestate[2][col]][1] ^ prestate[3][col];
+	}
+	for (int col = 0; col < 4; col++) {
+		state[col+2*4] = prestate[0][col] ^ prestate[1][col] ^ gf_mul[prestate[2][col]][0] ^ gf_mul[prestate[3][col]][1];
+	}
+	for (int col = 0; col < 4; col++) {
+		state[col+3*4] = gf_mul[prestate[0][col]][1] ^ prestate[1][col] ^ prestate[2][col] ^ gf_mul[prestate[3][col]][0];
+	}
+}
+
+void addRoundKey(unsigned char *state, unsigned char *round_key) {
+	for (int row = 0; row < 4; row++) {
+		for (int col = 0; col < 4; col++) {
+			int index = (col + row * 4) * 2;
+			state[col+row*4] = state[col+row*4] ^ round_key[col+row*4];
+		}
+	}
+}
+
 /** encrypt
  *  Perform AES encryption in software.
  *
@@ -68,7 +193,29 @@ char charsToHex(char c1, char c2)
  */
 void encrypt(unsigned char * msg_ascii, unsigned char * key_ascii, unsigned int * msg_enc, unsigned int * key)
 {
-	// Implement this function
+
+	// convert ms_ascii to hex matrix
+	unsigned char state[4][4];
+	unsigned char key_[4][4];
+	unsigned char round_key[10][4][4];
+	
+	charArrayToHex(msg_ascii, state);
+	charArrayToHex(key_ascii, key_);
+	keyExpansion(key_, round_key);
+
+	addRoundKey(state, key_);
+	for (int round = 0; round < 9; round++) {
+		subBytes(state);
+		shiftRows(state);
+		mixColumns(state);
+		addRoundKey(state, round_key[round]);
+	}
+	subBytes(state);
+	shiftRows(state);
+	addRoundKey(state, round_key[9]);
+
+	hexArrayToInt(state, msg_enc);
+	hexArrayToInt(key_, key);
 }
 
 /** decrypt
