@@ -11,7 +11,7 @@ module reg_file (
 	logic [31:0] write_data;
 	
 	always_comb begin
-		w = 16'b0;
+		w = '{16{1'b0}};
 		w[Addr] = W;
 		Read_Data = read_data[Addr];
 		write_data[7:0] = Byte_En[0] ? Write_Data[7:0] : Read_Data[7:0];
