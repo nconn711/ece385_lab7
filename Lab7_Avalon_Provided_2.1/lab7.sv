@@ -26,7 +26,7 @@ module lab7 (
 	output logic        DRAM_CKE,
 	output logic        DRAM_CS_N,
 	inout  logic [15:0] DRAM_DQ,
-    output logic		DRAM_LDQM,
+   output logic		DRAM_LDQM,
 	output logic 		DRAM_UDQM,
 	output logic        DRAM_RAS_N,
 	output logic        DRAM_WE_N,
