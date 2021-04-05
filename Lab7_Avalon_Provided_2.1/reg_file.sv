@@ -6,14 +6,6 @@ module reg_file (
 	output logic [31:0] Read_Data
 );
 
-module reg_file (
-	input logic Clk, Reset,
-	input logic W,
-	input logic [3:0] Addr, Byte_En,
-	input logic [31:0] Write_Data,
-	output logic [31:0] Read_Data
-);
-
 	logic [31:0] register [15:0];
 
 	assign Read_Data = register[Addr];
@@ -28,7 +20,5 @@ module reg_file (
 			register[Addr][31:24] <= Byte_En[3] ? Write_Data[31:24] : register[Addr][31:24];
 		end
 	end
-
-endmodule
 
 endmodule
