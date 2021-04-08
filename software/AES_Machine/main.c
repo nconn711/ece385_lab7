@@ -229,7 +229,16 @@ void encrypt(unsigned char * msg_ascii, unsigned char * key_ascii, unsigned int 
  */
 void decrypt(unsigned int * msg_enc, unsigned int * msg_dec, unsigned int * key)
 {
-	// Implement this function
+	for(int i = 0; i < 4; i++){
+		*(AES_PTR + i) = key[i];
+		*(AES_PTR + i + 4) = msg_enc[i];
+	}
+	*(AES_PTR + 14) = 0x1;
+	while (!(*(AES_PTR + 15) && 0x1));
+	for(int i = 0; i < 4; i++){
+		msg_dec[i] = *(AES_PTR + i + 8);
+	}
+	*(AES_PTR + 14) = 0x0;
 }
 
 /** main
@@ -271,9 +280,6 @@ int main()
 				printf("%08x", msg_dec[i]);
 			}
 			printf("\n");
-			for(i = 0; i < 4; i++){
-				*(AES_PTR + i) = key[i];
-			}
 		}
 	}
 	else {
