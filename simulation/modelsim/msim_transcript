@@ -1,0 +1,167 @@
+# Reading C:/intelFPGA_lite/18.1/modelsim_ase/tcl/vsim/pref.tcl
+# do ece385_lab7_run_msim_rtl_systemverilog.do
+# if {[file exists rtl_work]} {
+# 	vdel -lib rtl_work -all
+# }
+# vlib rtl_work
+# vmap work rtl_work
+# Model Technology ModelSim - Intel FPGA Edition vmap 10.5b Lib Mapping Utility 2016.10 Oct  5 2016
+# vmap work rtl_work 
+# Copying C:/intelFPGA_lite/18.1/modelsim_ase/win32aloem/../modelsim.ini to modelsim.ini
+# Modifying modelsim.ini
+# 
+# vlog -sv -work work +incdir+C:/Users/STP/Desktop/ece385_lab7/Lab7_Avalon_Provided_2.1 {C:/Users/STP/Desktop/ece385_lab7/Lab7_Avalon_Provided_2.1/state_machine.sv}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 17:26:08 on Apr 08,2021
+# vlog -reportprogress 300 -sv -work work "+incdir+C:/Users/STP/Desktop/ece385_lab7/Lab7_Avalon_Provided_2.1" C:/Users/STP/Desktop/ece385_lab7/Lab7_Avalon_Provided_2.1/state_machine.sv 
+# -- Compiling module state_machine
+# 
+# Top level modules:
+# 	state_machine
+# End time: 17:26:08 on Apr 08,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -sv -work work +incdir+C:/Users/STP/Desktop/ece385_lab7/Lab7_Avalon_Provided_2.1 {C:/Users/STP/Desktop/ece385_lab7/Lab7_Avalon_Provided_2.1/InvAddKey.sv}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 17:26:08 on Apr 08,2021
+# vlog -reportprogress 300 -sv -work work "+incdir+C:/Users/STP/Desktop/ece385_lab7/Lab7_Avalon_Provided_2.1" C:/Users/STP/Desktop/ece385_lab7/Lab7_Avalon_Provided_2.1/InvAddKey.sv 
+# -- Compiling module InvAddKey
+# 
+# Top level modules:
+# 	InvAddKey
+# End time: 17:26:08 on Apr 08,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -sv -work work +incdir+C:/Users/STP/Desktop/ece385_lab7/Lab7_Avalon_Provided_2.1 {C:/Users/STP/Desktop/ece385_lab7/Lab7_Avalon_Provided_2.1/SubBytes.sv}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 17:26:09 on Apr 08,2021
+# vlog -reportprogress 300 -sv -work work "+incdir+C:/Users/STP/Desktop/ece385_lab7/Lab7_Avalon_Provided_2.1" C:/Users/STP/Desktop/ece385_lab7/Lab7_Avalon_Provided_2.1/SubBytes.sv 
+# -- Compiling module SubBytes
+# -- Compiling module InvSubBytes
+# 
+# Top level modules:
+# 	SubBytes
+# 	InvSubBytes
+# End time: 17:26:09 on Apr 08,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -sv -work work +incdir+C:/Users/STP/Desktop/ece385_lab7/Lab7_Avalon_Provided_2.1 {C:/Users/STP/Desktop/ece385_lab7/Lab7_Avalon_Provided_2.1/InvShiftRows.sv}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 17:26:09 on Apr 08,2021
+# vlog -reportprogress 300 -sv -work work "+incdir+C:/Users/STP/Desktop/ece385_lab7/Lab7_Avalon_Provided_2.1" C:/Users/STP/Desktop/ece385_lab7/Lab7_Avalon_Provided_2.1/InvShiftRows.sv 
+# -- Compiling module InvShiftRows
+# 
+# Top level modules:
+# 	InvShiftRows
+# End time: 17:26:09 on Apr 08,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -sv -work work +incdir+C:/Users/STP/Desktop/ece385_lab7/Lab7_Avalon_Provided_2.1 {C:/Users/STP/Desktop/ece385_lab7/Lab7_Avalon_Provided_2.1/InvMixColumns.sv}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 17:26:09 on Apr 08,2021
+# vlog -reportprogress 300 -sv -work work "+incdir+C:/Users/STP/Desktop/ece385_lab7/Lab7_Avalon_Provided_2.1" C:/Users/STP/Desktop/ece385_lab7/Lab7_Avalon_Provided_2.1/InvMixColumns.sv 
+# -- Compiling module InvMixColumns
+# -- Compiling package InvMixColumns_sv_unit
+# -- Compiling module GF_Mul_9
+# -- Compiling module GF_Mul_b
+# -- Compiling module GF_Mul_d
+# -- Compiling module GF_Mul_e
+# 
+# Top level modules:
+# 	InvMixColumns
+# End time: 17:26:09 on Apr 08,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -sv -work work +incdir+C:/Users/STP/Desktop/ece385_lab7/Lab7_Avalon_Provided_2.1 {C:/Users/STP/Desktop/ece385_lab7/Lab7_Avalon_Provided_2.1/KeyExpansion.sv}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 17:26:09 on Apr 08,2021
+# vlog -reportprogress 300 -sv -work work "+incdir+C:/Users/STP/Desktop/ece385_lab7/Lab7_Avalon_Provided_2.1" C:/Users/STP/Desktop/ece385_lab7/Lab7_Avalon_Provided_2.1/KeyExpansion.sv 
+# -- Compiling module KeyExpansion
+# -- Compiling module KeyExpansionOne
+# 
+# Top level modules:
+# 	KeyExpansion
+# End time: 17:26:09 on Apr 08,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -sv -work work +incdir+C:/Users/STP/Desktop/ece385_lab7/Lab7_Avalon_Provided_2.1 {C:/Users/STP/Desktop/ece385_lab7/Lab7_Avalon_Provided_2.1/AES.sv}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 17:26:09 on Apr 08,2021
+# vlog -reportprogress 300 -sv -work work "+incdir+C:/Users/STP/Desktop/ece385_lab7/Lab7_Avalon_Provided_2.1" C:/Users/STP/Desktop/ece385_lab7/Lab7_Avalon_Provided_2.1/AES.sv 
+# -- Compiling module AES
+# 
+# Top level modules:
+# 	AES
+# End time: 17:26:09 on Apr 08,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlib lab7_soc
+# ** Warning: (vlib-34) Library already exists at "lab7_soc".
+# vmap lab7_soc lab7_soc
+# Model Technology ModelSim - Intel FPGA Edition vmap 10.5b Lib Mapping Utility 2016.10 Oct  5 2016
+# vmap lab7_soc lab7_soc 
+# Modifying modelsim.ini
+# 
+# vlog -sv -work work +incdir+C:/Users/STP/Desktop/ece385_lab7 {C:/Users/STP/Desktop/ece385_lab7/testbench.sv}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 17:26:09 on Apr 08,2021
+# vlog -reportprogress 300 -sv -work work "+incdir+C:/Users/STP/Desktop/ece385_lab7" C:/Users/STP/Desktop/ece385_lab7/testbench.sv 
+# -- Compiling module testbench
+# 
+# Top level modules:
+# 	testbench
+# End time: 17:26:10 on Apr 08,2021, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# 
+# vsim -t 1ps -L altera_ver -L lpm_ver -L sgate_ver -L altera_mf_ver -L altera_lnsim_ver -L fiftyfivenm_ver -L rtl_work -L work -L lab7_soc -voptargs="+acc"  testbench
+# vsim -t 1ps -L altera_ver -L lpm_ver -L sgate_ver -L altera_mf_ver -L altera_lnsim_ver -L fiftyfivenm_ver -L rtl_work -L work -L lab7_soc -voptargs=""+acc"" testbench 
+# Start time: 17:26:10 on Apr 08,2021
+# Loading sv_std.std
+# Loading work.testbench
+# Loading work.AES
+# Loading work.KeyExpansion
+# Loading work.KeyExpansionOne
+# Loading work.SubBytes
+# Loading work.InvShiftRows
+# Loading work.InvAddKey
+# Loading work.InvMixColumns
+# Loading work.InvMixColumns_sv_unit
+# Loading work.GF_Mul_9
+# Loading work.GF_Mul_b
+# Loading work.GF_Mul_d
+# Loading work.GF_Mul_e
+# Loading work.state_machine
+# Loading work.InvSubBytes
+# 
+# do C:/Users/STP/Desktop/ece385_lab7/simulation/modelsim/wave_0.do
+# onerror {resume}
+# quietly WaveActivateNextPane {} 0
+# add wave -noupdate -label Clk /testbench/CLK
+# add wave -noupdate -label Reset /testbench/RESET
+# add wave -noupdate -label Start /testbench/AES_START
+# add wave -noupdate -label Done /testbench/AES_DONE
+# add wave -noupdate -label KEY -radix hexadecimal /testbench/AES_KEY
+# add wave -noupdate -label MSG_ENC -radix hexadecimal /testbench/AES_MSG_ENC
+# add wave -noupdate -label MSG_DEC -radix hexadecimal /testbench/AES_MSG_DEC
+# add wave -noupdate -label state /testbench/top/sm_0/state
+# add wave -noupdate -label Round -radix unsigned /testbench/top/sm_0/Round
+# TreeUpdate [SetDefaultTree]
+# WaveRestoreCursors {{Cursor 1} {807330 ps} 0}
+# quietly wave cursor active 1
+# configure wave -namecolwidth 182
+# configure wave -valuecolwidth 201
+# configure wave -justifyvalue left
+# configure wave -signalnamewidth 0
+# configure wave -snapdistance 10
+# configure wave -datasetprefix 0
+# configure wave -rowmargin 4
+# configure wave -childrowmargin 2
+# configure wave -gridoffset 0
+# configure wave -gridperiod 1
+# configure wave -griddelta 40
+# configure wave -timeline 0
+# configure wave -timelineunits ns
+# update
+# WaveRestoreZoom {2958350 ps} {3890759 ps}
+run
+# ** Warning: (vsim-8315) C:/Users/STP/Desktop/ece385_lab7/Lab7_Avalon_Provided_2.1/state_machine.sv(39): No condition is true in the unique/priority if/case statement.
+#    Time: 0 ps  Iteration: 0  Instance: /testbench/top/sm_0
+# ** Warning: (vsim-8315) C:/Users/STP/Desktop/ece385_lab7/Lab7_Avalon_Provided_2.1/state_machine.sv(50): No condition is true in the unique/priority if/case statement.
+#    Time: 0 ps  Iteration: 0  Instance: /testbench/top/sm_0
+run
+run
+# End time: 17:29:28 on Apr 08,2021, Elapsed time: 0:03:18
+# Errors: 0, Warnings: 2

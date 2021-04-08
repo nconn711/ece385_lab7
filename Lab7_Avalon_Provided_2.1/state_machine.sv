@@ -29,7 +29,7 @@ module state_machine (
 	
         next_state = state;
 		next_Done = 1'b0;
-        next_Round = round;
+        next_Round = Round;
         
         Select = 2'b0;
         MIX = 2'b0;
@@ -37,30 +37,32 @@ module state_machine (
         LD_STATE_MIX = 1'b0;
 
 		unique case (next_state)
-            IDLE:		if (Start)
+            IDLE:			if (Start)
                             next_state = START;
-			START:		next_state = ADD;
+				START:		next_state = ADD;
             ADD:        next_state = (Round == 0) ? SHIFT : (Round == 10) ? DONE : MIX_0;
-            SHIFT, SUB_0, SUB_1, MIX_0, MIX_1, MIX_2, MIX_3:    next_state = next_state.next();
-			DONE:		if (~Start)
-							next_state = IDLE;
+            SHIFT, SUB_0, SUB_1, MIX_0, MIX_1, MIX_2:    next_state = next_state.next();
+				MIX_3:		next_state = SHIFT;
+				DONE:			if (~Start)
+									next_state = IDLE;
 		endcase
 		
 		unique case (state)
 
-			IDLE:       begin
+				IDLE:       begin
                             next_Round = 4'b1111;
                             next_Done = 1'b0;
                         end
             START:      begin
                             next_Round = 4'b0;
+									 LD_STATE = 1'b1;
                         end
             DONE:       begin
                             next_Round = 4'b1111;
                             next_Done = 1'b1;
                         end
-			SHIFT:      begin
-                            next_Round = round + 1;
+				SHIFT:      begin
+                            next_Round = Round + 1;
                             LD_STATE = 1'b1;
                             Select = 2'b00;
                         end
