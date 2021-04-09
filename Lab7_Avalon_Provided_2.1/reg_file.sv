@@ -14,8 +14,8 @@ module reg_file (
 
 	assign Read_Data = Register[Addr];
 
-	assign Key = {Register[3], Register[2], Register[1], Register[0]};
-	assign Enc = {Register[7], Register[6], Register[5], Register[4]};
+	assign Key = {Register[0], Register[1], Register[2], Register[3]};
+	assign Enc = {Register[4], Register[5], Register[6], Register[7]};
 	assign Start = Register[14][0];
 
 	always_ff @ (posedge Clk) begin

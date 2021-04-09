@@ -12,7 +12,7 @@ Register Map:
  4-7 : 4x 32bit AES Encrypted Message
  8-11: 4x 32bit AES Decrypted Message
    12: Not Used
-	13: Not Used
+   13: Not Used
    14: 32bit Start Register
    15: 32bit Done Register
 
@@ -38,14 +38,21 @@ module avalon_aes_interface (
 	output logic [31:0] EXPORT_DATA		// Exported Conduit Signal to LEDs
 );
 
-	always_ff @ (posedge CLK) begin
-		if (RESET)
-			EXPORT_DATA <= 32'b0;
-		else if (AVL_WRITE && AVL_ADDR == 4'b0000) // address to upper 4 bytes of AES_KEY
-			EXPORT_DATA[31:16] <= AVL_WRITEDATA[31:16];
-		else if (AVL_WRITE && AVL_ADDR == 4'b0011) // address to lower 4 bytes of AES_KEY
-			EXPORT_DATA[7:0] <= AVL_WRITEDATA[7:0];
-	end
+	logic [31:0] register [15:0];
+	logic [128:0] key, msg_enc, msg_dec;
+	logic start, done;
+
+	assign EXPORT_DATA = {key[127:112], 8'b0, key[7:0]};
+
+	AES AES_0 (
+		.CLK(CLK),
+		.RESET(RESET),
+		.AES_START(start),
+		.AES_DONE(done),
+		.AES_KEY(key),
+		.AES_MSG_ENC(msg_enc),
+		.AES_MSG_DEC(msg_dec)
+	);
 
 	reg_file reg_file_0	(
 		.Clk(CLK),
@@ -54,7 +61,12 @@ module avalon_aes_interface (
 		.Addr(AVL_ADDR),
 		.Byte_En(AVL_BYTE_EN),
 		.Write_Data(AVL_WRITEDATA),
-		.Read_Data(AVL_READDATA)
+		.Read_Data(AVL_READDATA),
+		.Dec(msg_dec),
+		.Done(done),
+		.Key(key),
+		.Enc(msg_enc),
+		.Start(start)
 	);
 
 endmodule
