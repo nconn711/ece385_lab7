@@ -39,17 +39,10 @@ module avalon_aes_interface (
 );
 
 	logic [31:0] register [15:0];
+	logic [128:0] key, msg_enc, msg_dec;
 	logic start, done;
-	logic [127:0] key, msg_enc, msg_dec;
 
-	always_ff @ (posedge CLK) begin : set_export_data
-		if (RESET)
-			EXPORT_DATA <= 32'b0;
-		else if (AVL_WRITE && AVL_ADDR == 4'b0000) // address to upper 4 bytes of AES_KEY
-			EXPORT_DATA[31:16] <= AVL_WRITEDATA[31:16];
-		else if (AVL_WRITE && AVL_ADDR == 4'b0011) // address to lower 4 bytes of AES_KEY
-			EXPORT_DATA[7:0] <= AVL_WRITEDATA[7:0];
-	end
+	assign EXPORT_DATA = {key[127:112], 8'b0, key[7:0]};
 
 	AES AES_0 (
 		.CLK(CLK),

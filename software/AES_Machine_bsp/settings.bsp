@@ -2,8 +2,8 @@
 <sch:Settings xmlns:sch="http://www.altera.com/embeddedsw/bsp/schema">
         <BspType>hal</BspType>
         <BspVersion>default</BspVersion>
-        <BspGeneratedTimeStamp>Apr 2, 2021 2:37:42 PM</BspGeneratedTimeStamp>
-        <BspGeneratedUnixTimeStamp>1617392262634</BspGeneratedUnixTimeStamp>
+        <BspGeneratedTimeStamp>Apr 8, 2021 8:43:15 PM</BspGeneratedTimeStamp>
+        <BspGeneratedUnixTimeStamp>1617932595760</BspGeneratedUnixTimeStamp>
         <BspGeneratedLocation>C:\Users\STP\Desktop\ece385_lab7\software\AES_Machine_bsp</BspGeneratedLocation>
         <BspSettingsFile>settings.bsp</BspSettingsFile>
         <SopcDesignFile>..\..\lab7_soc.sopcinfo</SopcDesignFile>

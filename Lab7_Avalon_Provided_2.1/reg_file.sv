@@ -10,19 +10,19 @@ module reg_file (
 	output logic Start
 );
 
-	logic [31:0] Register [15:0]
+	logic [31:0] Register [15:0];
 
 	assign Read_Data = Register[Addr];
 
-	assign Key = {>>{Register[3:0]}};
-	assign Enc = {>>{Register[7:4]}};
-	assign Start = Register[4'b1110][0];
+	assign Key = {Register[3], Register[2], Register[1], Register[0]};
+	assign Enc = {Register[7], Register[6], Register[5], Register[4]};
+	assign Start = Register[14][0];
 
 	always_ff @ (posedge Clk) begin
-		{>>{Register[11:8]}} <= Dec;
+		Register[11:8] <= '{Dec[31:0], Dec[63:32], Dec[95:64], Dec[127:96]};
 		Register[15][0] <= Done;
 		if (Reset)
-			Register <= {16{32'b0}};
+			Register <= '{16{32'b0}};
 		else if (W && !(Addr != 4'b1110 && Addr[3])) begin
 			Register[Addr][7:0] <= Byte_En[0] ? Write_Data[7:0] : Register[Addr][7:0];
 			Register[Addr][15:8] <= Byte_En[1] ? Write_Data[15:8] : Register[Addr][15:8];
